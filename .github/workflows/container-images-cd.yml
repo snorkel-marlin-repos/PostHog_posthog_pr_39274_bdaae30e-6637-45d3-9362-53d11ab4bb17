@@ -100,7 +100,7 @@ jobs:
                   token: ${{ secrets.GITHUB_TOKEN }}
 
             - name: Trigger PostHog Cloud deployment from Charts
-              uses: peter-evans/repository-dispatch@ff45666b9427631e3450c54a1bcbee4d9ff4d7c0 # v3
+              uses: peter-evans/repository-dispatch@5fc4efd1a4797ddb68ffd0714a238564e4cc0e6f # v3
               with:
                   token: ${{ steps.deployer.outputs.token }}
                   repository: PostHog/charts
@@ -126,7 +126,7 @@ jobs:
 
             - name: Trigger Ingestion Cloud deployment
               if: steps.check_changes_plugins.outputs.changed == 'true'
-              uses: peter-evans/repository-dispatch@ff45666b9427631e3450c54a1bcbee4d9ff4d7c0 # v3
+              uses: peter-evans/repository-dispatch@5fc4efd1a4797ddb68ffd0714a238564e4cc0e6f # v3
               with:
                   token: ${{ steps.deployer.outputs.token }}
                   repository: PostHog/charts
@@ -152,7 +152,7 @@ jobs:
 
             - name: Trigger Batch Exports Sync Temporal Worker Cloud deployment
               if: steps.check_changes_batch_exports_temporal_worker.outputs.changed == 'true'
-              uses: peter-evans/repository-dispatch@ff45666b9427631e3450c54a1bcbee4d9ff4d7c0 # v3
+              uses: peter-evans/repository-dispatch@5fc4efd1a4797ddb68ffd0714a238564e4cc0e6f # v3
               with:
                   token: ${{ steps.deployer.outputs.token }}
                   repository: PostHog/charts
@@ -173,7 +173,7 @@ jobs:
 
             - name: Trigger Batch Exports Temporal Worker Cloud deployment
               if: steps.check_changes_batch_exports_temporal_worker.outputs.changed == 'true'
-              uses: peter-evans/repository-dispatch@ff45666b9427631e3450c54a1bcbee4d9ff4d7c0 # v3
+              uses: peter-evans/repository-dispatch@5fc4efd1a4797ddb68ffd0714a238564e4cc0e6f # v3
               with:
                   token: ${{ steps.deployer.outputs.token }}
                   repository: PostHog/charts
@@ -199,7 +199,7 @@ jobs:
 
             - name: Trigger Max AI Temporal worker cloud deployment
               if: steps.check_changes_max_ai_temporal_worker.outputs.changed == 'true'
-              uses: peter-evans/repository-dispatch@ff45666b9427631e3450c54a1bcbee4d9ff4d7c0 # v3
+              uses: peter-evans/repository-dispatch@5fc4efd1a4797ddb68ffd0714a238564e4cc0e6f # v3
               with:
                   token: ${{ steps.deployer.outputs.token }}
                   repository: PostHog/charts
@@ -225,7 +225,7 @@ jobs:
 
             - name: Trigger Tasks Agent Temporal worker cloud deployment
               if: steps.check_changes_tasks_agent_temporal_worker.outputs.changed == 'true'
-              uses: peter-evans/repository-dispatch@ff45666b9427631e3450c54a1bcbee4d9ff4d7c0 # v3
+              uses: peter-evans/repository-dispatch@5fc4efd1a4797ddb68ffd0714a238564e4cc0e6f # v3
               with:
                   token: ${{ steps.deployer.outputs.token }}
                   repository: PostHog/charts
@@ -271,7 +271,7 @@ jobs:
 
             - name: Trigger Billing Temporal Worker Cloud deployment
               if: steps.check_changes_billing_temporal_worker.outputs.changed == 'true'
-              uses: peter-evans/repository-dispatch@ff45666b9427631e3450c54a1bcbee4d9ff4d7c0 # v3
+              uses: peter-evans/repository-dispatch@5fc4efd1a4797ddb68ffd0714a238564e4cc0e6f # v3
               with:
                   token: ${{ steps.deployer.outputs.token }}
                   repository: PostHog/charts
@@ -292,7 +292,7 @@ jobs:
 
             - name: Trigger Video Export Temporal Worker Cloud deployment
               if: steps.check_changes_video_export_temporal_worker.outputs.changed == 'true'
-              uses: peter-evans/repository-dispatch@ff45666b9427631e3450c54a1bcbee4d9ff4d7c0 # v3
+              uses: peter-evans/repository-dispatch@5fc4efd1a4797ddb68ffd0714a238564e4cc0e6f # v3
               with:
                   token: ${{ steps.deployer.outputs.token }}
                   repository: PostHog/charts
@@ -313,7 +313,7 @@ jobs:
 
             - name: Trigger Session Replay Temporal Worker Cloud deployment
               if: steps.check_changes_session_replay_temporal_worker.outputs.changed == 'true'
-              uses: peter-evans/repository-dispatch@ff45666b9427631e3450c54a1bcbee4d9ff4d7c0 # v3
+              uses: peter-evans/repository-dispatch@5fc4efd1a4797ddb68ffd0714a238564e4cc0e6f # v3
               with:
                   token: ${{ steps.deployer.outputs.token }}
                   repository: PostHog/charts
@@ -334,7 +334,7 @@ jobs:
 
             - name: Trigger General Purpose Temporal Worker Cloud deployment
               if: steps.check_changes_general_purpose_temporal_worker.outputs.changed == 'true'
-              uses: peter-evans/repository-dispatch@ff45666b9427631e3450c54a1bcbee4d9ff4d7c0 # v3
+              uses: peter-evans/repository-dispatch@5fc4efd1a4797ddb68ffd0714a238564e4cc0e6f # v3
               with:
                   token: ${{ steps.deployer.outputs.token }}
                   repository: PostHog/charts
@@ -355,7 +355,7 @@ jobs:
 
             - name: Trigger Messaging Temporal Worker Cloud deployment
               if: steps.check_changes_messaging_temporal_worker.outputs.changed == 'true'
-              uses: peter-evans/repository-dispatch@ff45666b9427631e3450c54a1bcbee4d9ff4d7c0 # v3
+              uses: peter-evans/repository-dispatch@5fc4efd1a4797ddb68ffd0714a238564e4cc0e6f # v3
               with:
                   token: ${{ steps.deployer.outputs.token }}
                   repository: PostHog/charts
@@ -381,7 +381,7 @@ jobs:
 
             - name: Trigger Data Warehouse Temporal Worker Cloud deployment
               if: steps.check_changes_data_warehouse_temporal_worker.outputs.changed == 'true'
-              uses: peter-evans/repository-dispatch@ff45666b9427631e3450c54a1bcbee4d9ff4d7c0 # v3
+              uses: peter-evans/repository-dispatch@5fc4efd1a4797ddb68ffd0714a238564e4cc0e6f # v3
               with:
                   token: ${{ steps.deployer.outputs.token }}
                   repository: PostHog/charts
@@ -402,7 +402,7 @@ jobs:
 
             - name: Trigger Data Warehouse Compaction Temporal Worker Cloud deployment
               if: steps.check_changes_data_warehouse_temporal_worker.outputs.changed == 'true'
-              uses: peter-evans/repository-dispatch@ff45666b9427631e3450c54a1bcbee4d9ff4d7c0 # v3
+              uses: peter-evans/repository-dispatch@5fc4efd1a4797ddb68ffd0714a238564e4cc0e6f # v3
               with:
                   token: ${{ steps.deployer.outputs.token }}
                   repository: PostHog/charts
@@ -423,7 +423,7 @@ jobs:
 
             - name: Trigger Data Warehouse Modeling Temporal Worker Cloud deployment
               if: steps.check_changes_data_warehouse_temporal_worker.outputs.changed == 'true'
-              uses: peter-evans/repository-dispatch@ff45666b9427631e3450c54a1bcbee4d9ff4d7c0 # v3
+              uses: peter-evans/repository-dispatch@5fc4efd1a4797ddb68ffd0714a238564e4cc0e6f # v3
               with:
                   token: ${{ steps.deployer.outputs.token }}
                   repository: PostHog/charts
@@ -449,7 +449,7 @@ jobs:
 
             - name: Trigger Dagster Code Location Reload
               if: steps.check_changes_dagster_code_location.outputs.changed == 'true'
-              uses: peter-evans/repository-dispatch@ff45666b9427631e3450c54a1bcbee4d9ff4d7c0 # v3
+              uses: peter-evans/repository-dispatch@5fc4efd1a4797ddb68ffd0714a238564e4cc0e6f # v3
               with:
                   token: ${{ steps.deployer.outputs.token }}
                   repository: PostHog/charts
