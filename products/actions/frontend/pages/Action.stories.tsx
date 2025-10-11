@@ -7,7 +7,7 @@ import { urls } from 'scenes/urls'
 
 import { mswDecorator } from '~/mocks/browser'
 import { toPaginatedResponse } from '~/mocks/handlers'
-import { AccessControlLevel, ActionType } from '~/types'
+import { ActionType } from '~/types'
 
 const MOCK_ACTION: ActionType = {
     id: 1,
@@ -62,7 +62,6 @@ const MOCK_ACTION: ActionType = {
     is_calculating: false,
     last_calculated_at: '2024-05-21T12:57:50.894221Z',
     pinned_at: null,
-    user_access_level: AccessControlLevel.Editor,
 }
 
 const meta: Meta = {

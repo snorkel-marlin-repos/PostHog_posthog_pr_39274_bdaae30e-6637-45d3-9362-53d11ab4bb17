@@ -41,9 +41,9 @@ TaxonomyNodeBound = BaseAssistantNode[TaxonomyStateType, TaxonomyPartialStateTyp
 
 class TaxonomyAgentNode(
     Generic[TaxonomyStateType, TaxonomyPartialStateType],
-    TaxonomyReasoningNodeMixin,
     TaxonomyNodeBound,
     StateClassMixin,
+    TaxonomyReasoningNodeMixin,
     ABC,
 ):
     """Base node for taxonomy agents."""
@@ -148,7 +148,7 @@ class TaxonomyAgentNode(
 
 
 class TaxonomyAgentToolsNode(
-    Generic[TaxonomyStateType, TaxonomyPartialStateType], TaxonomyReasoningNodeMixin, TaxonomyNodeBound, StateClassMixin
+    Generic[TaxonomyStateType, TaxonomyPartialStateType], TaxonomyNodeBound, StateClassMixin, TaxonomyReasoningNodeMixin
 ):
     """Base tools node for taxonomy agents."""
 
@@ -163,7 +163,7 @@ class TaxonomyAgentToolsNode(
     def node_name(self) -> MaxNodeName:
         return TaxonomyNodeName.TOOLS_NODE
 
-    async def arun(self, state: TaxonomyStateType, config: RunnableConfig) -> TaxonomyPartialStateType:
+    def run(self, state: TaxonomyStateType, config: RunnableConfig) -> TaxonomyPartialStateType:
         intermediate_steps = state.intermediate_steps or []
         action, _output = intermediate_steps[-1]
         tool_input: TaxonomyTool | None = None
@@ -198,12 +198,8 @@ class TaxonomyAgentToolsNode(
             return self._get_reset_state(ITERATION_LIMIT_PROMPT, "max_iterations", state)
 
         if tool_input and not output:
-            # Taxonomy is a separate graph, so it dispatches its own messages
-            reasoning_message = await self.get_reasoning_message(state)
-            if reasoning_message:
-                await self._write_message(reasoning_message)
             # Use the toolkit to handle tool execution
-            _, output = await self._toolkit.handle_tools(tool_input.name, tool_input)
+            _, output = self._toolkit.handle_tools(tool_input.name, tool_input)
 
         if output:
             tool_msg = LangchainToolMessage(

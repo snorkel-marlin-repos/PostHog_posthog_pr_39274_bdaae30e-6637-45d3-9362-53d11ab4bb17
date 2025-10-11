@@ -63,7 +63,6 @@ class TestActionApi(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
             "is_action": True,
             "bytecode_error": None,
             "tags": [],
-            "user_access_level": "manager",
         }
 
         # Assert analytics are sent
