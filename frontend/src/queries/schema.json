@@ -12446,8 +12446,7 @@
                 "TemporalIO",
                 "DoIt",
                 "LinkedinAds",
-                "RedditAds",
-                "TikTokAds"
+                "RedditAds"
             ],
             "type": "string"
         },
@@ -15261,8 +15260,7 @@
                 "meta-ads",
                 "clickup",
                 "reddit-ads",
-                "databricks",
-                "tiktok-ads"
+                "databricks"
             ],
             "type": "string"
         },

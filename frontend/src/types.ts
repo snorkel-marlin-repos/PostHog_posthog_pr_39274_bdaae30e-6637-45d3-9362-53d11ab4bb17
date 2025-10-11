@@ -299,7 +299,6 @@ export type WithAccessControl = {
 export enum AccessControlResourceType {
     Project = 'project',
     Organization = 'organization',
-    Action = 'action',
     FeatureFlag = 'feature_flag',
     Insight = 'insight',
     Dashboard = 'dashboard',
@@ -691,7 +690,7 @@ export interface ProductIntentType {
 // scenes, so not worth the refactor to use the `isAuthenticatedTeam()` check
 export type TeamPublicType = Partial<TeamType> & Pick<TeamType, 'id' | 'uuid' | 'name' | 'timezone'>
 
-export interface ActionType extends WithAccessControl {
+export interface ActionType {
     count?: number
     created_at: string
     deleted?: boolean
@@ -4335,7 +4334,6 @@ export const INTEGRATION_KINDS = [
     'clickup',
     'reddit-ads',
     'databricks',
-    'tiktok-ads',
 ] as const
 
 export type IntegrationKind = (typeof INTEGRATION_KINDS)[number]
@@ -4600,7 +4598,6 @@ export type AccessControlResponseType = {
     available_access_levels: AccessControlLevel[]
     user_access_level: AccessControlLevel
     default_access_level: AccessControlLevel
-    minimum_access_level?: AccessControlLevel
     user_can_edit_access_levels: boolean
 }
 

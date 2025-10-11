@@ -5,7 +5,6 @@ import { useEffect } from 'react'
 
 import { IconInfo, IconPlus, IconRewindPlay, IconTrash } from '@posthog/icons'
 
-import { AccessControlAction, getAccessControlDisabledReason, userHasAccess } from 'lib/components/AccessControlAction'
 import { NotFound } from 'lib/components/NotFound'
 import { SceneFile } from 'lib/components/Scenes/SceneFile'
 import { SceneTags } from 'lib/components/Scenes/SceneTags'
@@ -34,7 +33,7 @@ import { tagsModel } from '~/models/tagsModel'
 import { Query } from '~/queries/Query/Query'
 import { defaultDataTableColumns } from '~/queries/nodes/DataTable/utils'
 import { NodeKind } from '~/queries/schema/schema-general'
-import { AccessControlResourceType, ActionStepType, FilterLogicalOperator, ProductKey, ReplayTabs } from '~/types'
+import { ActionStepType, FilterLogicalOperator, ProductKey, ReplayTabs } from '~/types'
 
 import { ActionHogFunctions } from '../components/ActionHogFunctions'
 import { ActionStep } from '../components/ActionStep'
@@ -65,14 +64,6 @@ export function ActionEdit({ action: loadedAction, id, actionLoading }: ActionEd
     }, [loadedAction, action, setAction])
     const { tags } = useValues(tagsModel)
     const { addProductIntentForCrossSell } = useActions(teamLogic)
-
-    // Check if user can edit this action
-    const canEdit = userHasAccess(AccessControlResourceType.Action, 'editor', action.user_access_level)
-    const cannotEditReason = getAccessControlDisabledReason(
-        AccessControlResourceType.Action,
-        'editor',
-        action.user_access_level
-    )
 
     // Handle 404 when loading is done and action is missing
     if (id && !actionLoading && !loadedAction) {
@@ -112,7 +103,6 @@ export function ActionEdit({ action: loadedAction, id, actionLoading }: ActionEd
                             tags={action.tags || []}
                             tagsAvailable={tags}
                             dataAttrKey={RESOURCE_TYPE}
-                            canEdit={canEdit}
                         />
 
                         <SceneFile dataAttrKey={RESOURCE_TYPE} />
@@ -163,23 +153,17 @@ export function ActionEdit({ action: loadedAction, id, actionLoading }: ActionEd
                     </ScenePanelActionsSection>
                     <ScenePanelDivider />
                     <ScenePanelActionsSection>
-                        <AccessControlAction resourceType={AccessControlResourceType.Action} minAccessLevel="editor">
-                            {({ disabledReason }) => (
-                                <ButtonPrimitive
-                                    onClick={() => {
-                                        deleteAction()
-                                    }}
-                                    variant="danger"
-                                    menuItem
-                                    data-attr={`${RESOURCE_TYPE}-delete`}
-                                    disabled={!!disabledReason}
-                                    {...(disabledReason && { tooltip: disabledReason })}
-                                >
-                                    <IconTrash />
-                                    Delete
-                                </ButtonPrimitive>
-                            )}
-                        </AccessControlAction>
+                        <ButtonPrimitive
+                            onClick={() => {
+                                deleteAction()
+                            }}
+                            variant="danger"
+                            menuItem
+                            data-attr={`${RESOURCE_TYPE}-delete`}
+                        >
+                            <IconTrash />
+                            Delete
+                        </ButtonPrimitive>
                     </ScenePanelActionsSection>
                 </ScenePanel>
 
@@ -198,7 +182,7 @@ export function ActionEdit({ action: loadedAction, id, actionLoading }: ActionEd
                     onDescriptionChange={(value) => {
                         setActionValue('description', value)
                     }}
-                    canEdit={canEdit}
+                    canEdit
                     forceEdit={!id}
                     actions={
                         <>
@@ -259,7 +243,6 @@ export function ActionEdit({ action: loadedAction, id, actionLoading }: ActionEd
                                                 step={step}
                                                 actionId={action.id || 0}
                                                 isOnlyStep={!!stepsValue && stepsValue.length === 1}
-                                                disabledReason={cannotEditReason ?? undefined}
                                                 onDelete={() => {
                                                     const newSteps = [...stepsValue]
                                                     newSteps.splice(index, 1)
@@ -283,7 +266,6 @@ export function ActionEdit({ action: loadedAction, id, actionLoading }: ActionEd
                                             }}
                                             center
                                             className="w-full h-full"
-                                            disabledReason={cannotEditReason ?? undefined}
                                         >
                                             Add match group
                                         </LemonButton>
